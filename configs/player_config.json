@@ -1,0 +1,10 @@
+{
+  "case_id": "curry_gravity",
+  "player_name": "Stephen Curry",
+  "team": "Golden State Warriors",
+  "default_season": "2024-25",
+  "player_type": "shooter_gravity",
+  "report_title": "Stephen Curry: Quantifying Basketball Gravity",
+  "report_subtitle": "A Basketball Spatial Intelligence Report",
+  "output_dir": "figures/curry"
+}

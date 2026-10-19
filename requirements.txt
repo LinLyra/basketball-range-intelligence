@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+plotly
+scipy
+scikit-learn
+jupyter
+ipykernel
+nba_api
+tqdm
