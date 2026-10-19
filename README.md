@@ -8,6 +8,7 @@ efficiency evolve across seasons.
 - compares any two qualified NBA players on one coordinate system;
 - covers 2009–10 through 2024–25;
 - includes 902 players and 4,126 qualified player-seasons;
+- labels each player with the team or teams represented in that season;
 - replays individual shot attempts in chronological order;
 - distinguishes made and missed shots at event level;
 - switches between raw shots, attempt density, and cell field-goal percentage;
@@ -24,7 +25,8 @@ efficiency evolve across seasons.
 
 Gold filled dots represent made shots. Blue rings represent missed shots. Player
 seasons require at least 300 field-goal attempts. Accuracy cells require at least
-three attempts.
+three attempts. Player selectors are season-aware: only players with eligible data
+in the selected season appear, preventing empty comparisons.
 
 ## Stack
 
@@ -33,7 +35,7 @@ three attempts.
 - Apache ECharts
 - Python, pandas, and NumPy data pipeline
 - Pytest regression tests
-- GitHub Actions and GitHub Pages
+- Vercel-ready static deployment
 
 ## Run locally
 
@@ -59,8 +61,8 @@ npm ci
 npm run build
 ```
 
-The production website is generated in `web/dist/`. See
-[DEPLOYMENT.md](DEPLOYMENT.md) for hosting details.
+The production website is generated in `web/dist/`. The root-level `vercel.json`
+allows direct repository import in Vercel. See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Data notes
 

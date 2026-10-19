@@ -28,7 +28,10 @@ def main():
         for (pid,name),g in df.groupby(['player_id','player_name']):
             if len(g)<300: continue
             games=g.GAME_ID.nunique(); deep=g[g.is_deep_three]; very=g[g.is_very_deep]; threes=g[g.is_three]
+            team_counts=g.groupby(['TEAM_ID','TEAM_NAME']).size().sort_values(ascending=False)
+            teams=[{'id':int(tid),'name':str(tname),'fga':int(n)} for (tid,tname),n in team_counts.items()]
             row={'player_id':int(pid),'player_name':name,'fga':len(g),'games':int(games),
+                 'team':' / '.join(t['name'] for t in teams),'teams':teams,
                  'fga_per_game':len(g)/games,'three_rate':g.is_three.mean(),'three_fg_pct':threes.SHOT_MADE_FLAG.mean(),
                  'deep_rate':g.is_deep_three.mean(),'deep_fg_pct':deep.SHOT_MADE_FLAG.mean() if len(deep) else None,
                  'very_deep_rate':g.is_very_deep.mean(),'avg_distance':g.distance_from_rim_ft.mean()}
@@ -45,7 +48,7 @@ def main():
         summaries.sort(key=lambda r:r['player_name'])
         payload={'season':season,'players':summaries,'grids':grids}
         (OUT/f'{season}.json').write_text(json.dumps(payload,separators=(',',':')),encoding='utf-8')
-        index.append({'season':season,'players':[{'id':r['player_id'],'name':r['player_name']} for r in summaries]})
+        index.append({'season':season,'players':[{'id':r['player_id'],'name':r['player_name'],'team':r['team']} for r in summaries]})
         career.extend([{'season':season,**r} for r in summaries])
     (OUT/'index.json').write_text(json.dumps({'seasons':index},separators=(',',':')),encoding='utf-8')
     (OUT/'career.json').write_text(json.dumps(career,separators=(',',':')),encoding='utf-8')

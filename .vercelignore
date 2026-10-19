@@ -1,0 +1,14 @@
+.git
+.github
+.venv
+data
+figures
+reports
+research
+notebooks
+anaconda_projects
+templates
+web/node_modules
+web/dist
+__pycache__
+.pytest_cache

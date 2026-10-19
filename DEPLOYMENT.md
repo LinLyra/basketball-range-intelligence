@@ -1,25 +1,37 @@
 # Deployment
 
-The website is a static Vite application. Charts and shot events are generated
-ahead of time, so production hosting does not need Python or an API server.
+## Vercel — recommended
 
-## Build
+The repository is configured for zero-code Vercel deployment through `vercel.json`.
+
+1. Open the Vercel dashboard and select **Add New → Project**.
+2. Import `LinLyra/basketball-range-intelligence`.
+3. Keep the repository root as the Root Directory. Do not select `web/`.
+4. Vercel will read the install command, build command, output directory, and cache
+   headers from `vercel.json`.
+5. Select **Deploy**.
+
+| Setting | Value |
+| --- | --- |
+| Framework | Vite |
+| Install command | `npm --prefix web ci` |
+| Build command | `npm --prefix web run build` |
+| Output directory | `web/dist` |
+
+No environment variables or server runtime are required. Subsequent pushes to
+`main` can deploy automatically after the Vercel GitHub integration is enabled.
+
+## Local production check
 
 ```bash
-python scripts/export_web_data.py
-cd web
-npm ci
-npm run build
-npm run preview
+npm --prefix web ci
+npm --prefix web run build
+npm --prefix web run preview
 ```
-
-Deploy `web/dist/` to Netlify, Vercel, Cloudflare Pages, or GitHub Pages. The Vite
-base path is relative, so the same build works at a custom domain or repository
-subpath. Re-run the exporter whenever the source season files change.
 
 ## Data and attribution
 
-The deployed artifact includes derived NBA Stats shot records. Confirm the source's
-terms before public or commercial redistribution. Publish code, inclusion rules,
-schemas, and reproducible download instructions even when raw third-party records
-cannot be redistributed.
+The deployment contains derived NBA Stats shot-location records. Review source terms
+before commercial redistribution. Code, inclusion rules, schemas, and reproducible
+download instructions should remain available even when third-party raw data cannot
+be redistributed.
