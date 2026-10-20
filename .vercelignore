@@ -1,7 +1,7 @@
 .git
 .github
 .venv
-data
+/data/
 figures
 reports
 research
